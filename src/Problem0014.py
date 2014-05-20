@@ -1,5 +1,6 @@
 def collatz_series(n):
   current = n
+  yield current
   while current != 1:
     if current % 2 == 0:
       current = current / 2
@@ -10,8 +11,17 @@ def collatz_series(n):
 max_len = 0
 max_number = 0
 
-for n in range(1, 10000000):
-  l = len([x for x in collatz_series(n)])
+cached_lengths = {}
+
+for n in range(1, 1000000):
+  l = 0
+  for x in collatz_series(n):
+    if x in cached_lengths:
+      l += cached_lengths[x]
+      break
+    l += 1
+
+  cached_lengths[n] = l
   if l > max_len:
     max_len = l
     max_number = n
