@@ -5,7 +5,7 @@ def tap_grid(x, y):
   #bounds check
   if x > 19 or x < 0 or y > 19 or y < 0:
     return 0
-  return grid[19*y + x]
+  return grid[20*y + x]
 
 def sample_horizontal(x,y):
   samples = [tap_grid(i, y) for i in range(x, x + 4)]
@@ -19,6 +19,10 @@ def sample_diagonal(x, y):
   samples = [tap_grid(x + i, y + i) for i in range(0, 4)]
   return reduce(lambda i, j: i*j, samples)
 
+def sample_diagonal2(x, y):
+  samples = [tap_grid(x - i, y + i) for i in range(0, 4)]
+  return reduce(lambda i, j: i*j, samples)
+
 products = []
 
 for y in range(0, 20):
@@ -26,5 +30,6 @@ for y in range(0, 20):
     products.append(sample_horizontal(x, y))
     products.append(sample_verticle(x, y))
     products.append(sample_diagonal(x, y))
+    products.append(sample_diagonal2(x, y))
 
 print max(products)
