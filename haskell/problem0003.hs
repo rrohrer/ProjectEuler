@@ -16,3 +16,5 @@ factorize x = doFactorize x 2
         doFactorize y s = doFactorize y (s+1)
 
 problem3 = last $ factorize 600851475143
+
+main = do print problem3
