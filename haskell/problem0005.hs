@@ -1,0 +1,1 @@
+problem5 = foldl lcm 2 [3..20]
